@@ -1,0 +1,54 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+.maindiv {
+    width: 97%;
+    padding: 10px;
+    display: flex;
+    margin-left: 0.4%;
+
+    .playerCards {
+        width: 100%;
+        .goalkeeper {
+            margin: 0 auto; 
+            margin-top: 20px;
+        }
+    }
+    .lineupdiv {
+        width: 100%;
+    }
+}
+
+.defenders {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-evenly;
+    }
+
+    .midfielders{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+        justify-content: space-evenly;
+        .defensive-mid {
+            transform: translateY(40px);
+            margin-bottom: 30px;
+        }
+    }
+
+    .attackers {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+     justify-content: space-around;
+
+     .striker {
+        transform: translateY(-40px);
+     }
+    }

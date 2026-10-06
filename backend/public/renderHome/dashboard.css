@@ -1,0 +1,207 @@
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer;
+    margin-bottom: 0px;
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    border: 2px solid rgb(49, 52, 57);
+    padding: 10px;
+    border-radius: 6px;
+    width: fit-content;
+    gap: 40px;
+    box-shadow: 1px 2px 1px 2px rgb(88, 83, 83);
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+.gaffer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    p {
+       font-size: 30px; 
+    }
+    img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    img {
+        width: 50px;
+        height: 50px;
+    }
+
+    p {
+        font-size: 30px;
+    }
+}
+
+.team {
+    display: flex;
+    font-size: 30px;
+    align-items: center;
+}
+
+.profile {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    gap:3px;
+    img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.main {
+    display: flex;
+    margin : 20px 0px 0px 30px;
+    gap: 0.9%;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    flex-shrink: 1;
+}
+.stats {
+    border: 2px solid rgb(49, 52, 57);
+    width: 34%;
+    padding: 10px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 1px 2px 1px 2px rgb(88, 83, 83);
+    margin-bottom: 10px;
+    img {
+        width: 220px;
+        height: 220px;
+    }
+
+    p {
+        font-size: 60px;
+    }
+}
+
+.lineup {
+    border: 2px solid rgb(49, 52, 57);
+    display: flex;
+    flex-direction: row; /* Keeps board and content side-by-side */
+    width: 60%;
+    padding: 10x;
+    border-radius: 7px;
+    box-shadow: 1px 2px 1px 2px rgb(88, 83, 83);
+    align-items: center;
+    margin-bottom: 10px;
+    flex-shrink: 1;
+
+    .first {
+        font-size: 36px;
+    }
+}
+.img {
+    width: 220px;
+    height: 280px;
+}
+.content-right {
+    display: flex;
+    flex-direction: column; /* Stacks text and Mbappe vertically */
+    align-items: flex-start; /* Aligns them to the left of this container */
+    gap: 10px;
+}
+
+.passed {
+    display: flex;
+    flex-direction: row;
+}
+p {
+    font-size: 30px;
+}
+/* Ensure the player image doesn't force a wrap */
+.player {
+    width: 140px;
+    height: 160px;
+}
+
+.table {
+    width: 58%;
+    display: flex;
+    margin-top: 7px;
+    border: 2px solid rgb(49, 52, 57);
+    padding: 15px;
+    gap: 10px;
+    flex-shrink: 1;
+    border-radius: 7px;
+    box-shadow: 1px 2px 1px 2px rgb(88, 83, 83);
+
+    img {
+        width: 300px;
+        height: 230px;
+        border-radius: 3px;
+    }
+
+    .tablep {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+.fixure{
+    display: flex;
+    width: 34%;
+    box-shadow: 1px 2px 2px 1px rgb(49, 52, 57);
+    border: 2px solid rgb(49, 52, 57);
+    margin-top: 7px;
+    padding: 10px;
+    border-radius: 7px;
+    gap: 10px;
+    flex-shrink: 1;
+
+    p {
+        font-size: 26px;
+    }
+    img {
+        height: 220px;
+        width: 240px;
+    }
+}
+
+.kitimg {
+    width: 60px;
+    height: auto;
+}
+
+.teamsName {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    background-color: rgb(87, 101, 118);
+    height: min-content;
+    border-radius: 10px;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    box-shadow: 1px 2px 1px 2px rgb(88, 83, 83);
+    padding: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: 5px;
+  
+
+    img {
+        height: 60px;
+    }
+}
+
+.teamsName:hover {
+    background-color: transparent;
+    color: black;
+}
