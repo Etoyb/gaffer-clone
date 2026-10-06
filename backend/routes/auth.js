@@ -68,11 +68,11 @@ export const User = mongoose.model('User', usersSchema);
 
 export function authMiddleware(req,res,next) {
     const token = req.cookies.authToken;
-    if (!token) return res.redirect('https://gaffer-hub-frontend-v5bi.onrender.com/login.html')
+    if (!token) return res.redirect('http://localhost:5500/frontend/login.html')
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET,(err,decoded) => {
       if (err) {
-         return res.redirect('https://gaffer-hub-frontend-v5bi.onrender.com/login.html');
+         return res.redirect('http://localhost:5500/frontend/login.html');
       }
       req.user = decoded;
       next()
@@ -132,12 +132,12 @@ export function authMiddleware(req,res,next) {
       if (!realUser.hasCompleteTeam()) {
         return res.json({ 
           success: true, 
-          redirectUrl: 'https://gaffer-hub-backend-yy35.onrender.com/app/user/teamCreate' 
+          redirectUrl: 'http://localhost:3000/app/user/teamCreate' 
         });
       }else {
         return res.json({ 
           success: true, 
-          redirectUrl: 'https://gaffer-hub-backend-yy35.onrender.com/app/user/dashboard',
+          redirectUrl: 'https://localhost:3000/app/user/dashboard',
       });
       }
      

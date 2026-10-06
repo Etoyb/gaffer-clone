@@ -5,7 +5,7 @@ document.querySelector('.login').addEventListener('submit', (e) => {
     const username = document.querySelector('.nameLog').value;
     const password = document.querySelector('.inputPass').value;
   
-    fetch('https://gaffer-hub-backend-yy35.onrender.com/auth/login', {
+    fetch('http://localhost:3000/auth/login', {
   
         method: 'POST',
         headers: {

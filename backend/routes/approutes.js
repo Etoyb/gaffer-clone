@@ -53,7 +53,7 @@ router.post('/teamData', authMiddleware,async (req, res) => {
 
     return res.json({ 
         success: true, 
-        redirectUrl: 'hhttps://gaffer-hub-backend-yy35.onrender.com/app/user/dashboard',
+        redirectUrl: 'https://localhost:3000/app/user/dashboard',
     });
 })
 

@@ -16,7 +16,7 @@ connectDB()
 
 // 1. CORS FIRST
 app.use(cors({
-    origin: 'https://gaffer-hub-frontend-v5bi.onrender.com',
+    origin: 'http://localhost:5500',
     credentials: true,
     methods: ['POST', 'GET', 'DELETE', 'PATCH', 'PUT', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
