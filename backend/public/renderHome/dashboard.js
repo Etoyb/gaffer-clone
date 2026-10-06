@@ -5,7 +5,7 @@ let jersey = null;
 let name = null
 
 // fetching data from the backend 
-fetch('https://gaffer-hub-backend-yy35.onrender.com/auth/userData').then( async response => {
+fetch('http://localhost:3000/auth/userData').then( async response => {
      const  data = await response.json();
     if (response.ok) {
         const destruct = data.teamname;
@@ -53,7 +53,7 @@ document.addEventListener('click', (event) => {
     }
 
     // getting data from backend
-    fetch('https://gaffer-hub-backend-yy35.onrender.com/auth/userData').then( async response => {
+    fetch('http://localhost:3000/auth/userData').then( async response => {
         const  data = await response.json();
        if (response.ok) {
            const destruct = data.teamname;

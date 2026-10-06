@@ -16,7 +16,7 @@ connectDB()
 
 // 1. CORS FIRST
 app.use(cors({
-    origin: 'http://localhost:5500',
+    origin: ['http://localhost:5500','http://127.0.0.1:5500/', null],
     credentials: true,
     methods: ['POST', 'GET', 'DELETE', 'PATCH', 'PUT', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -33,7 +33,7 @@ app.use(cookieParser());
 app.use('/auth', authRoutes);
 app.use('/app/user', appRoutes )
 
-app.use(express.static(path.join(process.cwd(), 'public')));
+app.use(express.static(path.join(process.cwd(),'..', 'public')));
 
 mongoose.connection.once('open', () => {
     console.log('opennnnnn');

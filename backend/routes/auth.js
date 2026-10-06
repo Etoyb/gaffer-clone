@@ -125,8 +125,7 @@ export function authMiddleware(req,res,next) {
       res.cookie('authToken', token, {
          maxAge: 900000,
          httpOnly: true,
-         secure: true,
-         sameSite: 'none'
+         secure: false,
       });
   
       if (!realUser.hasCompleteTeam()) {
@@ -137,7 +136,7 @@ export function authMiddleware(req,res,next) {
       }else {
         return res.json({ 
           success: true, 
-          redirectUrl: 'https://localhost:3000/app/user/dashboard',
+          redirectUrl: 'http://localhost:3000/app/user/dashboard',
       });
       }
      

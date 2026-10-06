@@ -1,9 +1,9 @@
 const simplelineuptemp = document.body.innerHTML;
 const endpoints = {
-    Goalkeeper: 'https://gaffer-hub-backend-yy35.onrender.com/players?position=Keeper',
-    Defenders:  'https://gaffer-hub-backend-yy35.onrender.com/players?position=Defender',
-    Midfielder: 'https://gaffer-hub-backend-yy35.onrender.com/players?position=Midfielder',
-    Attacker:   'https://gaffer-hub-backend-yy35.onrender.com/players?position=Attacker'
+    Goalkeeper: 'http://localhost:3000/players?position=Keeper',
+    Defenders:  'http://localhost:3000/players?position=Defender',
+    Midfielder: 'http://localhost:3000/players?position=Midfielder',
+    Attacker:   'http://localhost:3000/players?position=Attacker'
     
 }
 
