@@ -9,8 +9,8 @@ const endpoints = {
 
 document.body.addEventListener('click', async event => {
     const target = event.target.classList;
+    const exactPos = target[0]
     let position;
-
 
     const positionMap = {
       Attacker:['striker', 'winger-7', 'winger-11'],
@@ -33,8 +33,7 @@ document.body.addEventListener('click', async event => {
     const res = await fetch(url)
     const players = await res.json();
 
-    console.log(url)
-    console.log(players)
+
 
     const playerSelect = players.map(player => {
       return `
@@ -61,16 +60,36 @@ document.body.addEventListener('click', async event => {
     ${playerSelect}
     </div>`;
 
-    document.body.addEventListener('click', event => {
+    document.body.addEventListener ('click', async event  =>  {
       const clicked = event.target.closest('.card');
       if (!clicked) return
-    
-      const classed = clicked.dataset.player
+         const classed = clicked.dataset.player 
+         if (!classed) return;
       
-      if (!classed) return;
+      const thePlayer = await players.find(p => p.name === classed);
+    
+      const name = thePlayer.name
+      const image = thePlayer.img
+      const playerPos = thePlayer.position
+      const playerrating = thePlayer.rating
+      const exactPos = target[0]
 
+        fetch('http://localhost:3000/auth/recieveplayers', {
+          method: 'POST', 
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({name,image,playerPos,playerrating, exactPos}),
+          credentials: 'include',
+        }).then( async response => {
+          const data = await response.json() 
+          if (response.ok ) {
+            console.log('sucess', data)
+          }
+        }).catch(err => console.log('Error: ',err))
     })
 
+    
 });
 
 

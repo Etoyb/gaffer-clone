@@ -16,7 +16,7 @@ connectDB()
 
 // 1. CORS FIRST
 app.use(cors({
-    origin: ['http://localhost:5500','http://127.0.0.1:5500/', null],
+    origin: ['http://localhost:5500','http://127.0.0.1:5500', null],
     credentials: true,
     methods: ['POST', 'GET', 'DELETE', 'PATCH', 'PUT', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']

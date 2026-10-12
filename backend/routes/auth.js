@@ -49,9 +49,30 @@ export const usersSchema = new Schema({
     selectedPlayers: {
       type: String,
       default: "",
-      defenders: [],
-      midfeolders: [],
-      attackers: []
+      
+      goalkeeper: "",
+      defenders: [
+        {
+          leftback: "",
+          centreback1: "",
+          centreback2: "",
+          rightback: ""
+        } 
+      ],
+      midfeolders: [
+        {
+          defensivemid: "",
+          midfielder8: "",
+          midfielder10: ""
+        }
+      ],
+      attackers: [
+        {
+          striker: "",
+          winger7: "",
+          winger11: ""
+        }
+      ]
     }
 })
 
@@ -157,5 +178,14 @@ export function authMiddleware(req,res,next) {
 
     res.json(returnData)
    })
+
+  router.post('/recieveplayers', authMiddleware, async (req, res) => {
+    const {name,image,playerPos,playerrating, exactPos} = req.body
+    
+    const positionMap = {
+
+    }
+
+  })
 
 export default router;
