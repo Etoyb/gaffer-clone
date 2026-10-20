@@ -1,3 +1,4 @@
+import { template } from "./template.js";
 const simplelineuptemp = document.body.innerHTML;
 const endpoints = {
     Goalkeeper: 'http://localhost:3000/players?position=Keeper',
@@ -7,9 +8,10 @@ const endpoints = {
     
 }
 
+let returnedplayers = '';
+let selectedPitchPosition = null  
 document.body.addEventListener('click', async event => {
-    const target = event.target.classList;
-    const exactPos = target[0]
+    const target = event.target.closest('.card').classList;
     let position;
 
     const positionMap = {
@@ -18,11 +20,11 @@ document.body.addEventListener('click', async event => {
       Defenders:['right-back', 'left-back', 'centre-back-1', 'centre-back-2'],
       Goalkeeper:['goalkeeper']
     }
-  
     for (const [posname, classArray] of Object.entries(positionMap)) {
       const matches = classArray.some(className => target.contains(className));
       if (matches) {
         position = posname;
+        selectedPitchPosition = classArray.find(c => target.contains(c));
         break;
       }
     }
@@ -32,8 +34,7 @@ document.body.addEventListener('click', async event => {
 
     const res = await fetch(url)
     const players = await res.json();
-
-
+    returnedplayers = players
 
     const playerSelect = players.map(player => {
       return `
@@ -60,36 +61,37 @@ document.body.addEventListener('click', async event => {
     ${playerSelect}
     </div>`;
 
-    document.body.addEventListener ('click', async event  =>  {
-      const clicked = event.target.closest('.card');
-      if (!clicked) return
-         const classed = clicked.dataset.player 
-         if (!classed) return;
-      
-      const thePlayer = await players.find(p => p.name === classed);
-    
-      const name = thePlayer.name
-      const image = thePlayer.img
-      const playerPos = thePlayer.position
-      const playerrating = thePlayer.rating
-      const exactPos = target[0]
-
-        fetch('http://localhost:3000/auth/recieveplayers', {
-          method: 'POST', 
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({name,image,playerPos,playerrating, exactPos}),
-          credentials: 'include',
-        }).then( async response => {
-          const data = await response.json() 
-          if (response.ok ) {
-            console.log('sucess', data)
-          }
-        }).catch(err => console.log('Error: ',err))
-    })
-
-    
 });
 
+document.body.addEventListener ('click', async event  =>  {
+  const clicked = event.target.closest('.card');
+  console.log(clicked)
 
+     const classed = clicked.dataset.player 
+     if (!classed) return;
+    console.log(classed)
+     const thePlayer = returnedplayers.find(p => p.name === classed);
+
+  const name = await thePlayer.name
+  const image = await thePlayer.img
+  const playerPos = await thePlayer.position
+  const playerrating = await thePlayer.rating 
+  const exactPos = await selectedPitchPosition
+   const response = await fetch('http://localhost:3000/app/user/recieveplayers', {
+      method: 'POST', 
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({name,image,playerPos,playerrating, exactPos}),
+      credentials: 'include'
+    }).then( async response => {
+      const data = await response.json()
+      if (response.ok ) {
+        if (typeof data !== "object" || data === null) {
+          console.log('Player is selcted')
+          return
+        }
+
+       }
+    }).catch(err => console.log('Error: ',err))
+})

@@ -53,8 +53,126 @@ router.post('/teamData', authMiddleware,async (req, res) => {
 
     return res.json({ 
         success: true, 
-        redirectUrl: 'https://localhost:3000/app/user/dashboard',
+        redirectUrl: 'http://localhost:3000/app/user/dashboard',
     });
 })
 
+router.get('/userdata',authMiddleware, async (req,res) => {
+    const user = req.user.user;
+
+    const  userdata = await User.findOne( {
+      username: user
+    })
+
+    const returnData = {
+      teamname: userdata.teamname,
+      Jersey:`${userdata.Jersey}_jersey`,
+      shorts: userdata.kitShorts,
+    }
+
+    res.json(returnData)
+   })
+
+  router.post('/recieveplayers', authMiddleware, async (req, res) => {
+    const {name,image,playerPos,playerrating, exactPos} = req.body
+    const user = req.user.user
+    
+    const positionMap = {
+      'goalkeeper':   'selectedPlayers.goalkeeper.goalkeeper',
+      'left-back':    'selectedPlayers.defenders.leftback',
+      'centre-back-1':'selectedPlayers.defenders.centreback1',
+      'centre-back-2':'selectedPlayers.defenders.centreback2',
+      'right-back':   'selectedPlayers.defenders.rightback',
+      'defensive-mid':'selectedPlayers.midfelders.defensivemid' ,
+      'central-mid-8':'selectedPlayers.midfelders.midfielder8' ,
+      'central-mid-10':'selectedPlayers.midfelders.midfielder10' ,
+      'winger-7':      'selectedPlayers.attackers.winger7',
+      'winger-11':     'selectedPlayers.attackers.winger11',
+      'striker':        'selectedPlayers.attackers.striker'
+    }
+
+    const positionname = positionMap[exactPos]
+    const player = await User.findOne({
+      username: user
+    })
+
+    const allPlayers = JSON.stringify(player.selectedPlayers)
+
+    if (allPlayers.includes(`${name}`)){
+      res.json(`${name} has already been selected`)
+      return
+    }
+    const playersData = await User.findOneAndUpdate(
+      {username : user}, 
+        {
+          $set: {
+            [positionname]: {
+              name,image,playerPos, playerrating
+            }
+          }
+        }, {returnDocument: 'after'}
+    )
+
+  })
+
+  router.get('/lineup', authMiddleware, async (req,res) => {
+    const user = req.user.user
+
+    const player = await User.findOne({
+      username: user
+    })
+
+
+    const positionMap = {
+      'goalkeeper':   'selectedPlayers.goalkeeper.goalkeeper',
+      'left-back':    'selectedPlayers.defenders.leftback',
+      'centre-back-1':'selectedPlayers.defenders.centreback1',
+      'centre-back-2':'selectedPlayers.defenders.centreback2',
+      'right-back':   'selectedPlayers.defenders.rightback',
+      'defensive-mid':'selectedPlayers.midfelders.defensivemid' ,
+      'central-mid-8':'selectedPlayers.midfelders.midfielder8' ,
+      'central-mid-10':'selectedPlayers.midfelders.midfielder10' ,
+      'winger-7':      'selectedPlayers.attackers.winger7',
+      'winger-11':     'selectedPlayers.attackers.winger11',
+      'striker':        'selectedPlayers.attackers.striker'
+    }
+
+    const reverseMap = Object.fromEntries(
+      Object.entries(positionMap).map(
+          ([frontendPath, databasePath]) => [
+              databasePath, 
+              frontendPath
+          ]
+      )
+
+  );
+
+  const selected = player?.selectedPlayers; // Safe navigation
+  const result = [];
+  
+  if (selected) {
+    for (const [groupKey, group] of Object.entries(selected)) {
+      // Ensure the group is actually an object before looping
+      if (!group || typeof group !== 'object') continue;
+  
+      for (const [posKey, playerObj] of Object.entries(group)) {
+        // Validate player object and ensure it has a name
+        if (!playerObj || !playerObj.name) continue;
+  
+        const fullPath = `selectedPlayers.${groupKey}.${posKey}`;
+        const frontendPos = reverseMap[fullPath];
+  
+        // Optional: skip if the position mapping is completely missing
+        if (!frontendPos) continue; 
+  
+        result.push({
+          position: frontendPos,
+          ...playerObj
+        });
+      }
+    }
+  }
+  
+res.json(result);
+  })
 export default router;

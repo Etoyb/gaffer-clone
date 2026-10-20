@@ -7,6 +7,7 @@ import path from 'path'; // <--- THIS WAS MISSING
 import { fileURLToPath } from 'url';
 import env from 'dotenv'
 import mongoose from 'mongoose';
+import { type } from 'os';
 const Schema = mongoose.Schema
 
 
@@ -47,32 +48,32 @@ export const usersSchema = new Schema({
     },
 
     selectedPlayers: {
-      type: String,
-      default: "",
-      
-      goalkeeper: "",
-      defenders: [
+      goalkeeper:
+       {
+        goalkeeper: {type:Object, default: {}}
+       },
+      defenders: 
         {
-          leftback: "",
-          centreback1: "",
-          centreback2: "",
-          rightback: ""
+          leftback:  {type:Object, default: {} },
+          centreback1: {type:Object, default: {} },
+          centreback2: {type:Object, default: {} },
+          rightback:  {type:Object, default: {} }
         } 
-      ],
-      midfeolders: [
+      ,
+      midfelders: 
         {
-          defensivemid: "",
-          midfielder8: "",
-          midfielder10: ""
+          defensivemid:  {type:Object, default: {} },
+          midfielder8:   {type:Object, default: {} },
+          midfielder10:  {type:Object, default: {} }
         }
-      ],
-      attackers: [
+      ,
+      attackers: 
         {
-          striker: "",
-          winger7: "",
-          winger11: ""
+          striker:  {type:Object, default: {} },
+          winger7:  {type:Object, default: {} },
+          winger11:  {type:Object, default: {} }
         }
-      ]
+      
     }
 })
 
@@ -163,29 +164,6 @@ export function authMiddleware(req,res,next) {
      
    });
  
-   router.get('/userdata',authMiddleware, async (req,res) => {
-    const user = req.user.user;
-
-    const  userdata = await User.findOne( {
-      username: user
-    })
-
-    const returnData = {
-      teamname: userdata.teamname,
-      Jersey:`${userdata.Jersey}_jersey`,
-      shorts: userdata.kitShorts,
-    }
-
-    res.json(returnData)
-   })
-
-  router.post('/recieveplayers', authMiddleware, async (req, res) => {
-    const {name,image,playerPos,playerrating, exactPos} = req.body
-    
-    const positionMap = {
-
-    }
-
-  })
+   
 
 export default router;

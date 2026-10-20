@@ -1,11 +1,11 @@
 
-document.querySelector('.login').addEventListener('submit', (e) => {
+document.querySelector('.login').addEventListener('submit',  async (e) => {
  e.preventDefault();
     document.querySelector('.errorDis').innerHTML =''
     const username = document.querySelector('.nameLog').value;
     const password = document.querySelector('.inputPass').value;
   
-    fetch('http://localhost:3000/auth/login', {
+   await fetch('http://localhost:3000/auth/login', {
   
         method: 'POST',
         headers: {
