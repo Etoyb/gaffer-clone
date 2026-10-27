@@ -10,6 +10,7 @@ import path from 'path';
 import env from 'dotenv'
 import mongoose from 'mongoose';
 import connectDB from '../db.js'
+import fixtures from '../public/Core/fixture.js'
 
 //connect to Db
 connectDB()

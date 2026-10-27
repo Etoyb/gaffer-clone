@@ -126,6 +126,15 @@ export function authMiddleware(req,res,next) {
 
    // login router 
    router.post('/login', async (req,res) => {
+
+    const users = await User.find({
+      teamname: { $nin: ['', null] },
+      Jersey: { $nin: ['', null] },
+      kitShorts: { $nin: ['', null] }
+  });
+  
+  console.log(users);
+
       const { username, password } = req.body;
 
     if (!username || !password ) {

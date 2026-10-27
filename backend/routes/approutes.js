@@ -76,7 +76,7 @@ router.get('/userdata',authMiddleware, async (req,res) => {
   router.post('/recieveplayers', authMiddleware, async (req, res) => {
     const {name,image,playerPos,playerrating, exactPos} = req.body
     const user = req.user.user
-    
+
     const positionMap = {
       'goalkeeper':   'selectedPlayers.goalkeeper.goalkeeper',
       'left-back':    'selectedPlayers.defenders.leftback',
@@ -112,6 +112,8 @@ router.get('/userdata',authMiddleware, async (req,res) => {
           }
         }, {returnDocument: 'after'}
     )
+
+    res.json(`player ${name} has been added to lineuip`)
 
   })
 

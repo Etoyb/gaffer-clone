@@ -1,4 +1,3 @@
-import { template } from "./template.js";
 const simplelineuptemp = document.body.innerHTML;
 const endpoints = {
     Goalkeeper: 'http://localhost:3000/players?position=Keeper',
@@ -57,6 +56,7 @@ document.body.addEventListener('click', async event => {
 
     document.body.innerHTML = `
     <button class="SelectLineupHome"> Back</button>
+    <p class="returnedms"> Select your player</p>
      <div class="playerSelect"> 
     ${playerSelect}
     </div>`;
@@ -72,12 +72,12 @@ document.body.addEventListener ('click', async event  =>  {
     console.log(classed)
      const thePlayer = returnedplayers.find(p => p.name === classed);
 
-  const name = await thePlayer.name
-  const image = await thePlayer.img
-  const playerPos = await thePlayer.position
-  const playerrating = await thePlayer.rating 
-  const exactPos = await selectedPitchPosition
-   const response = await fetch('http://localhost:3000/app/user/recieveplayers', {
+  const name =  thePlayer.name
+  const image =  thePlayer.img
+  const playerPos =  thePlayer.position
+  const playerrating =  thePlayer.rating 
+  const exactPos =  selectedPitchPosition
+   await fetch('http://localhost:3000/app/user/recieveplayers', {
       method: 'POST', 
       headers: {
           'Content-Type': 'application/json',
@@ -87,11 +87,8 @@ document.body.addEventListener ('click', async event  =>  {
     }).then( async response => {
       const data = await response.json()
       if (response.ok ) {
-        if (typeof data !== "object" || data === null) {
-          console.log('Player is selcted')
-          return
-        }
-
+        console.log(data)
+        document.querySelector('.returnedms').innerHTML = `<p> ${data}</p>`
        }
     }).catch(err => console.log('Error: ',err))
 })

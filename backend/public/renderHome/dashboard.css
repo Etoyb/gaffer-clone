@@ -3,6 +3,8 @@ body {
     cursor: pointer;
     margin-bottom: 0px;
     margin: 0;
+    color: black;
+    background-color: rgb(231, 231, 231);
 }
 
 .navbar {
@@ -184,7 +186,7 @@ p {
     display: flex;
     flex-direction: row;
     width: fit-content;
-    background-color: rgb(87, 101, 118);
+    background-color: rgba(71, 75, 81, 0.872);
     height: min-content;
     border-radius: 10px;
     align-items: center;
@@ -204,4 +206,7 @@ p {
 .teamsName:hover {
     background-color: transparent;
     color: black;
+}
+.returnedms {
+    font-size: 17px;
 }
